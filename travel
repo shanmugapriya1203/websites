@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ff7f50;
+            color: white;
+            padding: 20px;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        .destination-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .destination {
+            width: 30%;
+            text-align: center;
+        }
+        .destination img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✈️ Wanderlust Diaries</h1>
+        <p>Explore the world, one destination at a time!</p>
+    </header>
+    
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Destinations</a>
+        <a href="#">Travel Tips</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+    </nav>
+    
+    <figure>
+        <img src="van.jpg" alt="Travel Image" width="80%">
+    </figure>
+    
+    <main>
+        <section>
+            <h2>🌍 Popular Destinations</h2>
+            <p>Discover breathtaking locations across the globe!</p>
+            <div class="destination-container">
+                <article class="destination">
+                    <img src="https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg?auto=compress&cs=tinysrgb&w=600" 
+                    alt="Paris" width="80%">
+                    <h3>Paris, France</h3>
+                    <p>The city of love and lights!</p>
+                </article>
+                <article class="destination">
+                    <img src="https://images.pexels.com/photos/1544351/pexels-photo-1544351.jpeg?auto=compress&cs=tinysrgb&w=600"
+                     alt="Bali" width="80%">
+                    <h3>Bali, Indonesia</h3>
+                    <p>Tropical paradise with serene beaches.</p>
+                </article>
+                <article class="destination">
+                    <img src="https://images.pexels.com/photos/1525612/pexels-photo-1525612.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                    alt="New York" width="80%">
+                    <h3>New York, USA</h3>
+                    <p>The city that never sleeps!</p>
+                </article>
+            </div>
+        </section>
+        
+        <section>
+            <h2>💡 Travel Tips</h2>
+            <ul>
+                <li>✔ Pack light and smart</li>
+                <li>✔ Always have travel insurance</li>
+                <li>✔ Learn basic phrases of the local language</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>📝 Latest Blog Posts</h2>
+            <article>
+                <h3>🌴 My Solo Trip to Bali</h3>
+                <p>Bali is an amazing place for solo travelers. Here's what I experienced...</p>
+                <a href="#" style="color: #ff7f50;">Read more</a>
+            </article>
+            <article>
+                <h3>🏔️ Exploring the Alps</h3>
+                <p>A thrilling journey through the snowy mountains of Switzerland!</p>
+                <a href="#" style="color: #ff7f50;">Read more</a>
+            </article>
+        </section>
+        
+        <section>
+            <h2>📩 Get in Touch</h2>
+            <form>
+                <input type="text" placeholder="Your Name" style="padding: 10px; width: 80%; margin: 5px;"><br>
+                <input type="email" placeholder="Your Email" style="padding: 10px; width: 80%; margin: 5px;"><br>
+                <textarea placeholder="Your Message" style="padding: 10px; width: 80%; margin: 5px;"></textarea><br>
+                <button type="submit" style="background-color: #ff7f50; color: white; padding: 10px 20px; border: none;">Send Message</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 Wanderlust Diaries | Designed with ❤️</p>
+    </footer>
+</body>
+</html>
