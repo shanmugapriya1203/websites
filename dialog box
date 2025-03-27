@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javacript dialog boxes</title>
+    <script>
+        function showAlert(){
+            alert("Welcome to javascript")
+        }
+        function getUsername(){
+            let name=prompt("Enter your name")
+            if(name){
+                alert(`Hello ${name}`)
+            }
+            else{
+                alert("Please enter your name")
+            }
+        }
+        function confirmDelete(){
+            let response= confirm("Are you sure you want to delete this item?")
+            if(response){
+                alert("Item deleted successfully")
+            }
+            else{
+                alert("Item not deleted")
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <!-- <h2>Javascript Alert examples</h2>
+    <button onclick="showAlert()">Click me</button> -->
+    <!-- <h2>Javascript prompt example</h2>
+    <button onclick="getUsername()">Enter name</button> -->
+    <h2>Javascript confirm Box example</h2>
+    <button onclick="confirmDelete()">Delete item</button>
+</body>
+</html>
