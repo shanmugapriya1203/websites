@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Attendance Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .page {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"], input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btn-secondary {
+            background-color: #2196F3;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1976D2;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .student-list {
+            margin-top: 20px;
+        }
+
+        .student-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .attendance-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .attendance-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .attendance-btn {
+            padding: 6px 12px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .present {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .absent {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .current-date {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .error {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: #4CAF50;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" id="logoutBtn" onclick="logout()">Logout</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>School Attendance Tracker</h1>
+        </div>
+
+        <!-- Login Page -->
+        <div class="page active" id="loginPage">
+            <h2 style="text-align: center; margin-bottom: 30px;">Teacher Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Login</button>
+                </div>
+                <div id="loginError" class="error"></div>
+            </form>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="page" id="dashboardPage">
+            <h2 style="text-align: center; margin-bottom: 30px;">Dashboard</h2>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="showPage('addStudentPage')">
+                    Add Student</button>
+                <button class="btn btn-secondary" onclick="showPage('attendancePage')">Track Attendance</button>
+                <button class="btn btn-secondary" onclick="showPage('viewStudentsPage')">View Students</button>
+            </div>
+            <div style="text-align: center; color: #666;">
+                <p>Welcome to the Attendance Tracker</p>
+                <p>Total Students: <span id="totalStudents">0</span></p>
+            </div>
+        </div>
+
+        <!-- Add Student Page -->
+        <div class="page" id="addStudentPage">
+            <h2 style="margin-bottom: 30px;">Add New Student</h2>
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" name="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentId">Student ID:</label>
+                    <input type="text" id="studentId" name="studentId" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Add Student</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPage('dashboardPage')">
+                        Back to Dashboard</button>
+                </div>
+                <div id="addStudentMessage"></div>
+            </form>
+        </div>
+
+        <!-- View Students Page -->
+        <div class="page" id="viewStudentsPage">
+            <h2 style="margin-bottom: 30px;">All Students</h2>
+            <button class="btn btn-secondary"
+             onclick="showPage('dashboardPage')"
+              style="margin-bottom: 20px;">Back to Dashboard</button>
+            <div id="studentsList"></div>
+        </div>
+
+        <!-- Attendance Page -->
+        <div class="page" id="attendancePage">
+            <h2 style="margin-bottom: 20px;">Mark Attendance</h2>
+            <div class="current-date" id="currentDate"></div>
+            <button class="btn btn-secondary" onclick="showPage('dashboardPage')"
+             style="margin-bottom: 20px;">Back to Dashboard</button>
+            <div class="form-group">
+                <label for="attendanceDate">Select Date:</label>
+                <input type="date" id="attendanceDate" name="attendanceDate">
+            </div>
+            <table class="attendance-table" id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Attendance</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTableBody">
+                </tbody>
+            </table>
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="btn" onclick="saveAttendance()">Save Attendance</button>
+            </div>
+            <div id="attendanceMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let students = [];
+        let attendance = {};
+        let isLoggedIn = false;
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            setCurrentDate();
+            
+            // Login form handler
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                login();
+            });
+            
+            // Add student form handler
+            document.getElementById('addStudentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addStudent();
+            });
+        });
+
+        // Login function (simple demo credentials)
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            // Demo credentials (in real app, this would be server-side)
+            if (username === 'teacher' && password === 'password') {
+                isLoggedIn = true;
+                document.getElementById('logoutBtn').style.display = 'block';
+                showPage('dashboardPage');
+                errorDiv.textContent = '';
+            } else {
+                errorDiv.textContent = 'Invalid username or password';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            showPage('loginPage');
+        }
+
+        // Show specific page
+        function showPage(pageId) {
+            if (!isLoggedIn && pageId !== 'loginPage') {
+                showPage('loginPage');
+                return;
+            }
+            
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update data when showing specific pages
+            if (pageId === 'dashboardPage') {
+                updateDashboard();
+            } else if (pageId === 'viewStudentsPage') {
+                displayStudents();
+            } else if (pageId === 'attendancePage') {
+                displayAttendanceTable();
+            }
+        }
+
+        // Add student function
+        function addStudent() {
+            const name = document.getElementById('studentName').value.trim();
+            const id = document.getElementById('studentId').value.trim();
+            const messageDiv = document.getElementById('addStudentMessage');
+            
+            if (!name || !id) {
+                messageDiv.innerHTML = '<div class="error">Please fill in all fields</div>';
+                return;
+            }
+            
+            // Check if student ID already exists
+            if (students.find(student => student.id === id)) {
+                messageDiv.innerHTML = '<div class="error">Student ID already exists</div>';
+                return;
+            }
+            
+            // Add student
+            students.push({ id: id, name: name });
+            saveData();
+            
+            messageDiv.innerHTML = '<div class="success">Student added successfully!</div>';
+            document.getElementById('addStudentForm').reset();
+            
+            // Clear message after 3 seconds
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        // Display students list
+        function displayStudents() {
+            const studentsList = document.getElementById('studentsList');
+            
+            if (students.length === 0) {
+                studentsList.innerHTML = '<p>No students added yet.</p>';
+                return;
+            }
+            
+            let html = '';
+            students.forEach((student, index) => {
+                html += `
+                    <div class="student-item">
+                        <div>
+                            <strong>${student.name}</strong> (ID: ${student.id})
+                        </div>
+                        <button class="btn btn-danger" onclick="removeStudent(${index})">Remove</button>
+                    </div>
+                `;
+            });
+            
+            studentsList.innerHTML = html;
+        }
+
+        // Remove student
+        function removeStudent(index) {
+            if (confirm('Are you sure you want to remove this student?')) {
+                students.splice(index, 1);
+                saveData();
+                displayStudents();
+                updateDashboard();
+            }
+        }
+
+        // Set current date
+        function setCurrentDate() {
+            const today = new Date();
+            const dateString = today.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('currentDate').textContent = dateString;
+            document.getElementById('attendanceDate').value = today.toISOString().split('T')[0];
+        }
+
+        // Display attendance table
+        function displayAttendanceTable() {
+            const tableBody = document.getElementById('attendanceTableBody');
+            const selectedDate = document.getElementById('attendanceDate').value;
+            
+            if (students.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="3" style="text-align: center;">No students added yet.</td></tr>';
+                return;
+            }
+            
+            let html = '';
+            students.forEach(student => {
+                const attendanceKey = `${selectedDate}_${student.id}`;
+                const currentAttendance = attendance[attendanceKey] || 'not-marked';
+                
+                html += `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>
+                            <button class="attendance-btn present ${currentAttendance === 'present' ? 'present' : ''}" 
+                                    onclick="markAttendance('${student.id}', 'present')">Present</button>
+                            <button class="attendance-btn absent ${currentAttendance === 'absent' ? 'absent' : ''}" 
+                                    onclick="markAttendance('${student.id}', 'absent')">Absent</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tableBody.innerHTML = html;
+        }
+
+        // Mark attendance
+        function markAttendance(studentId, status) {
+            const selectedDate = document.getElementById('attendanceDate').value;
+            const attendanceKey = `${selectedDate}_${studentId}`;
+            
+            attendance[attendanceKey] = status;
+            
+            // Update button styles
+            displayAttendanceTable();
+        }
+
+        // Save attendance
+        function saveAttendance() {
+            saveData();
+            const messageDiv = document.getElementById('attendanceMessage');
+            messageDiv.innerHTML = '<div class="success">Attendance saved successfully!</div>';
+            
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        // Update dashboard
+        function updateDashboard() {
+            document.getElementById('totalStudents').textContent = students.length;
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            const data = {
+                students: students,
+                attendance: attendance
+            };
+            // Note: Using variable storage instead of localStorage for Claude.ai compatibility
+            window.appData = data;
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            // Note: Using variable storage instead of localStorage for Claude.ai compatibility
+            if (window.appData) {
+                const data = window.appData;
+                students = data.students || [];
+                attendance = data.attendance || {};
+            }
+        }
+
+        // Update attendance table when date changes
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('attendanceDate');
+            if (dateInput) {
+                dateInput.addEventListener('change', displayAttendanceTable);
+            }
+        });
+    </script>
+</body>
+</html>
