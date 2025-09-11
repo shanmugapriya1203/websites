@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📚 Book Haven</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background: #fafafa;
+        }
+        header {
+            background: #3e2723;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #ffd54f;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        #hero {
+            background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1350&q=80') 
+            no-repeat center center/cover;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        #hero h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        #hero p {
+            font-size: 1.3em;
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        h2 {
+            color: #3e2723;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ffd54f;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style: square;
+            padding-left: 25px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            background: #ffe082;
+            padding: 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        .reviews {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .reviews p {
+            margin: 10px 0;
+        }
+        form {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        }
+        form input, form button {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        form button {
+            background: #3e2723;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        form button:hover {
+            background: #5d4037;
+        }
+        footer {
+            background: #3e2723;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>📚 Book Haven</h1>
+        <nav>
+            <ul>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#bestsellers">Bestsellers</a></li>
+                <li><a href="#newarrivals">New Arrivals</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h2>Welcome to Book Haven</h2>
+        <p>Your one-stop shop for stories, knowledge, and adventures.</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories">
+        <h2>Book Categories</h2>
+        <ul>
+            <li><b>Fiction</b> – Novels that spark your imagination</li>
+            <li><b>Non-Fiction</b> – Learn and explore real stories</li>
+            <li><b>Kids</b> – Fun and colorful tales for children</li>
+            <li><b>Comics</b> – Graphic stories and superheroes</li>
+            <li><b>Self-Help</b> – Books to inspire and motivate</li>
+            <li><b>Science & Tech</b> – Explore innovation and discovery</li>
+        </ul>
+    </section>
+
+    <!-- Bestsellers Section -->
+    <section id="bestsellers">
+        <h2>Bestsellers</h2>
+        <ul>
+            <li><span class="highlight"><b>The Silent Patient</b> – ₹499</span></li>
+            <li><span class="highlight"><b>Atomic Habits</b> – ₹399</span></li>
+            <li><span class="highlight"><b>Harry Potter Series</b> – ₹999</span></li>
+            <li><span class="highlight"><b>Wings of Fire</b> – ₹299</span></li>
+        </ul>
+    </section>
+
+    <!-- New Arrivals -->
+    <section id="newarrivals">
+        <h2>New Arrivals</h2>
+        <ul>
+            <li><b>The Psychology of Money</b> – ₹349</li>
+            <li><b>Ikigai</b> – ₹299</li>
+            <li><b>Rich Dad Poor Dad</b> – ₹399</li>
+        </ul>
+    </section>
+
+    <!-- Reviews Section (NEWLY ADDED) -->
+    <section id="reviews">
+        <h2>What Our Readers Say</h2>
+        <div class="reviews">
+            <p>⭐ "Book Haven is my go-to store! Their collection is amazing." – Priya</p>
+            <p>⭐ "Fast delivery and great prices. Highly recommended!" – Karthik</p>
+            <p>⭐ "Love the kids section. My daughter enjoys reading every night." – Meena</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Book Haven is a cozy online bookstore where stories come alive. 
+           From timeless classics to the latest bestsellers, we’ve got something for every reader!</p>
+        <p>We believe in the power of reading to inspire, educate, and entertain people of all ages.</p>
+        <p>📦 Free delivery for orders above ₹500 | 🕒 Open 24/7 | 🌍 Serving readers across India</p>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <input type="text" id="message" name="message" required>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>📌 Follow us: Instagram | Facebook | Twitter</p>
+        <p>&copy; 2025 Book Haven. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
